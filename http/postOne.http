@@ -1,0 +1,12 @@
+POST http://localhost:5000/cats HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Barsik",
+    "breed": "Siam",
+    "color": "white",
+    "age": 5,
+    "weight": 6,
+    "favorite": "chicken"
+
+}

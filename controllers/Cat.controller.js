@@ -1,6 +1,14 @@
 const {Cat} = require('../models');
 
-module.exports.createOne = () => {};
+module.exports.createOne = async (req, res, next) => {
+    try {
+        const {body} = req;
+        const createdCat = await Cat.create(body);
+        res.status(201).send(createdCat);
+    } catch (error) {
+        res.status(400);
+    }
+};
 
 module.exports.getAll = async (req, res, next) => {
     try{
