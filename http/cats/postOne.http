@@ -7,6 +7,7 @@ Content-Type: application/json
     "color": "white",
     "age": 5,
     "weight": 6,
-    "favorite": "chicken"
+    "favorite": "chicken",
+    "owner": 1
 
 }

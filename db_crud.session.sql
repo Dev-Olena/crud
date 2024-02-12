@@ -17,3 +17,17 @@ VALUES (
     7,
     'tuna'
   );
+
+CREATE TABLE owners(
+    id serial PRIMARY KEY,
+    first_name varchar(300) NOT NULL CHECK(first_name != ''),
+    last_name varchar(300) NOT NULL CHECK(last_name != ''),
+    address text NOT NULL CHECK(address != ''),
+    phone char(12) NOT NULL CHECK(phone != '')
+);
+
+ALTER TABLE cats
+ADD COLUMN owner int REFERENCES owners(id);
+
+ALTER TABLE cats
+ALTER CONSTRAINT "cat_pk" PRIMARY KEY(id, owner);

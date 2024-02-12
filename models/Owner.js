@@ -1,23 +1,13 @@
-class Cat {
-    static _tableName = 'cats';
+class Owner {
+    static _tableName = 'owners';
     static _client;
 
     static _attributes = {
-        name: 'string',
-        breed: 'string',
-        color: 'string',
-        age: 'number',
-        weight: 'number',
-        favorite: 'string',
-        owner: 'number'
+        first_name: 'string',
+        last_name: 'string',
+        address: 'string',
+        phone: 'string'
     }
-
-   /* static async create(bodyObj) {
-        const {name, breed, color, age, weight, favorite} = bodyObj;
-        const insertString = `INSERT INTO ${this._tableName} (name, breed, color, age, weight, favorite) VALUES ('${name}', '${breed}', '${color}', ${age},  ${weight}, '${favorite}') RETURNING *;`
-        const {rows} = await this._client.query(insertString);
-        return rows;
-    };*/
 
     static async create(insertValues) {
         const insertAttr = Object.entries(this._attributes)
@@ -66,9 +56,16 @@ class Cat {
     };
 
     static async deleteByPk(id) {
-        const {rows} = await this._client.query(`DELETE FROM ${this._tableName} WHERE id = ${id} RETURNING *`)
+        const {rows} = await this._client.query(`DELETE FROM ${this._tableName} WHERE id = ${id} RETURNING *;`)
         return rows;
     }
+
+    static async addCat({catId, ownerId}) {
+        const str = `UPDATE cats SET owner = ${ownerId} WHERE id = ${catId} RETURNING *;`
+        const {rows} = await this._client.query(str);
+        return rows;
+    }
+
 }
 
-module.exports = Cat;
+module.exports = Owner;

@@ -1,15 +1,16 @@
 const express = require('express');
-const CatController = require('./controllers/Cat.controller');
 const bodyParser = express.json();
+const catRouter = require('./routs/CatRouter');
+const ownerRouter = require('./routs/OwnerRouter');
 
 const app = express();
 
-app.get('/cats', CatController.getAll);
+app.use(bodyParser);
 
-app.get('/cats/:catId', CatController.getOne);
+app.use('/cats', catRouter);
+app.use('/owners', ownerRouter);
 
-app.delete('/cats/:catId', CatController.deleteOne);
+//error handling
 
-app.post('/cats', bodyParser, CatController.createOne);
 
 module.exports = app;
